@@ -1,7 +1,6 @@
 // init project
 var path = require('path');
-const bodyParser = require('body-parser');
-const os = require('os');
+const accept = require('accept');
 var express = require('express');
 var app = express();
 
@@ -15,7 +14,7 @@ app.get("/", function (request, response) {
 });
 
 app.get('/api/whoami', (req, res) => {
-  res.json(req.headers);
+  res.json(accept.parseAll(req.headers));
   // return {
     // "ipaddress": req.ip,
     // "language": req.acceptLanguages(),
