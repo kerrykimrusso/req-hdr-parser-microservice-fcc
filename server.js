@@ -20,7 +20,7 @@ app.get('/api/whoami', (req, res) => {
   res.json({
     "ipaddress": req.ip,
     "language": headers.languages()[0],
-    "software": req.useragent.source.
+    "software": req.uesragent && req.useragent.source ? req.useragent.source.match(/\(([^)]+)\)/)[1] : ""
   }).end();
 });
 
