@@ -1,12 +1,14 @@
 // init project
 var path = require('path');
-const accept = require('accept');
+const accepts = require('accepts');
 var express = require('express');
+const eua = require('express-useragent');
 var app = express();
 
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
+app.use(eua.express());
 
 // routing
 app.get("/", function (request, response) {
@@ -14,12 +16,12 @@ app.get("/", function (request, response) {
 });
 
 app.get('/api/whoami', (req, res) => {
-  res.json(accept.parseAll(req.headers));
-  // return {
-    // "ipaddress": req.ip,
-    // "language": req.acceptLanguages(),
-    // "software": "Macintosh; Intel Mac OS X 10_12_6"}
-  // }
+  let headers = accepts(req);
+  res.json({
+    "ipaddress": req.ip,
+    "language": headers.languages()[0],
+    "software": req.useragent
+  }).end();
 });
 
 
