@@ -12,7 +12,8 @@ app.use(eua.express());
 
 // routing
 app.get("/", function (request, response) {
-  response.sendFile(__dirname + '/views/index.html');
+  response.redirect('/api/whoami');
+  // response.sendFile(__dirname + '/views/index.html');
 });
 
 app.get('/api/whoami', (req, res) => {
@@ -20,7 +21,7 @@ app.get('/api/whoami', (req, res) => {
   res.json({
     "ipaddress": req.ip,
     "language": headers.languages()[0],
-    "software": req.uesragent && req.useragent.source ? req.useragent.source.match(/\(([^)]+)\)/)[1] : ""
+    "software": req.useragent && req.useragent.source ? req.useragent.source.match(/\(([^)]+)\)/)[1] : ""
   }).end();
 });
 
