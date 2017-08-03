@@ -9,14 +9,18 @@ var app = express();
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-// routes
+// routing
+app.get("/", function (request, response) {
+  response.sendFile(__dirname + '/views/index.html');
+});
+
 app.get('/api/whoami', (req, res) => {
-  
-  return {
-    "ipaddress": req.ip,
-    "language": ,
-    "software": "Macintosh; Intel Mac OS X 10_12_6"}
-  }
+  res.json(req.headers);
+  // return {
+    // "ipaddress": req.ip,
+    // "language": req.acceptLanguages(),
+    // "software": "Macintosh; Intel Mac OS X 10_12_6"}
+  // }
 });
 
 
